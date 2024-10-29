@@ -1,186 +1,164 @@
-# project-2
-HOTEL BOOKING EDA
+# Hotel Booking Analysis - EDA Using Python and Dashboard Making Using Tableau
+
+## <ins> Dashboard Link </ins> - [Link](https://public.tableau.com/views/HotelBookingsDashboard_17301865491130/HBDDASHBOARD?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+
+## <ins> Dashboard Preview </ins>
+![Dashboard](https://github.com/pratiktamgadge/EDA-Hotel-Booking-Analysis/blob/f54e520227cd43775f5760955c2421aa6f0be167/HOTEL%20BOOKING%20ANALYSIS%20DASHBOARD.PNG)
+
+### <ins> Dashboard Usage <ins>
+- To view the dashboard, follow these steps:
+  - Clone this repository to your local machine or download the Tableau dashboard file or click the above dashboard link.
+  - Open the dashboard file using Tableau Desktop or Tableau Online.
+  - Connect the dashboard using the provided dataset given in repository.
+  - Explore the different pages and visuals within the dashboard to gain insights.
+
+## <ins> Objective </ins>
+#### Our primary goal is to conduct EDA on the provided dataset and derive valuable conclusions about broad hotel booking trends and how various factors interact to affect hotel bookings.
+## <ins> Dataset </ins>
+     We get a dataset of hotel reservations. A city hotel and a resort hotel's reservations are included in this dataset. It has the following features:
+     - hotel: Name of hotel ( City or Resort)
+     - is_canceled: Whether the booking is canceled or not (0 for no canceled and 1 for canceled)
+     - lead_time: time (in days) between booking transaction and actual arrival.
+     - arrival_date_year: Year of arrival
+     - arrival_date_month: month of arrival
+     - arrival_date_week_number: week number of arrival date.
+     - arrival_date_day_of_month: Day of month of arrival date
+     - stays_in_weekend_nights: No. of weekend nights spent in a hotel
+     - stays_in_week_nights: No. of weeknights spent in a hotel
+     - adults: No. of adults in single booking record.
+     - children: No. of children in single booking record.
+     - babies: No. of babies in single booking record. 
+     - meal: Type of meal chosen 
+     - country: Country of origin of customers
+     - market_segment: What segment via booking was made and for what purpose.
+     - distribution_channel: Via which medium booking was made.
+     - is_repeated_guest: Whether the customer has made any booking before(0 for No and 1 for 
+                     Yes)
+     - previous_cancellations: No. of previous canceled bookings.
+     - previous_bookings_not_canceled: No. of previous non-canceled bookings.
+     - reserved_room_type: Room type reserved by a customer.
+     - assigned_room_type: Room type assigned to the customer.
+     - booking_changes: No. of booking changes done by customers
+     - deposit_type: Type of deposit at the time of making a booking (No deposit/ Refundable/ No refund)
+     - agent: Id of agent for booking
+     - company: Id of the company making a booking
+     - days_in_waiting_list: No. of days on waiting list.
+     - customer_type: Type of customer(Transient, Group, etc.)
+     - adr: Average Daily rate.
+     - required_car_parking_spaces: No. of car parking asked in booking
+     - total_of_special_requests: total no. of special request.
+     - reservation_status: Whether a customer has checked out or canceled,or not showed 
+     - reservation_status_date: Date of making reservation status.
+
+Total 119390 rows and 32 columns in dataset
+
+## <ins> Data Cleaning and Feature Engineering </ins>
+     [1] Removing Duplicate Values
+     - Rows that were duplicates were removed.
+     [2] Handling Null / Missing Values
+     - Children, country, and agent are discrete numerical variables, so replaced null values with mode of it.
+     - Variable company had null values greater than 50%, so removed it.
+     [3] Removing Outliers
+     - Interquartile Range in the skew symmetric curve used to remove outliers found in the lead_time and adr variables.
+     [4] Converting Columns to Appropriate Data Types
+     - Datatypes of variables "children," "agent," "reservation_status_date," "total_people," and "total_children" were transformed from float64 datatypes to int64.
+     - Datatype of the variable "reservation_status_date" was transformed from object datatype to datetime64.
+     [5] Created New Columns
+     - The variable "total_stays" is created by adding the variables "stays_in_weekend_nights" and "stays_in_weeknights."
+     - The variable "total_people" is created by adding the variables "adults," "children," and "babies."
+     - The variable "reserved_room_assigned" is made up of the variables "reserved_room_type" and "assigned_room_type."
+     - From variables "children" and "babies," a new "total_children" variable is created by adding both of them.
+     - The variable "total_people" used to create "guest_category."
+     - The variable "lead_time_category" created from the variable "lead_time."
+## <ins> Exploratory Data Analysis </ins>
+     performed EDA and tried answering the following questions:
+     - 1] Is not having a reserved room assigned a reason for booking cancellations?
+     - 2]  Is the high lead_time a reason for booking cancellations?
+     - 3] How many people are reservations made for?
+     - 4] Which hotel type has the most advanced reservations?
+     - 5] Which distribution channels have the most cancellations of bookings?
+     - 6] Which market segment is most used for booking hotels, and which market segment bookings are most canceled?
+     - 7]  Which room generates a higher ADR?
+     - 8]  Which hotel type is the busiest?
+     - 9] Which month is the busiest for hotels?
+     - 10]  Which customer type generates more revenue in terms of hotel types and customer types?
+     - 11] In terms of hotel types, how many parking spaces are most frequently requested by customers?
+     - 12]  What is the most common number of nights booked by customers?
+     - 13] What is the most common number of special requests made by customers, and what kind of customer are they?
+     - 14] Is the ADR affected by the hotel not giving a reserved room?
+     - 15] The majority of bookings were made for how many people, and the majority of cancellations of bookings were made for how many people?
+     - 16] Which country makes the most reservations, and which agent makes the most bookings?
+     - 17] Does a longer waiting period cause the cancellation of bookings?
+
+     These following graphs and plots were primarily created using Matplotlib and the Seaborn package.
+     - Count plot
+     - Bar plot
+     - Line plot
+     - Box plot
+     - Violin plot
+     - Kdeplot
+     - Heatmap
+     - Pairplot
+
+##### <ins>Univariate Analysis</ins>
+     performed univariate analysis and reached the following conclusions:
+     - A city hotel was most preferred by 61.07 percent of customers over a resort.
+     - 72.48% of bookings are not cancelled. Almost one-third of all reservations are canceled. 
+     - Bookings increased by 33.28% in 2016 compared to 2015, but fell by 12.25% in 2017.
+     - Customers make the most reservations in August, followed by July. Customers made the fewest reservations in November, - December, and January. So we can make offers to customers in November, December, and January to maximise booking.
+     - BB is the most requested food.
+     - Most of the bookings are made through the online platform.
+     - The top distribution channel is TA/TO, which is used to make most of the bookings.
+     - The majority of hotel bookings are made by new customers. Very few customers (3.86%) visited again.
+     - The customer's top preference is for Room A to be reserved.
+     - Customers do not want to pay a pre-deposit for a reservation.
+     - Most customers (80%) preferred to book a hotel for a short stay.
+     - 90% of people do not require parking spaces for their vehicles.
+     - 70% chance that bookings will not be cancelled by customers.
+     - Reserved rooms were not assigned to 15% of customers. Ensure that customers receive the rooms they have reserved.
+     - Reservations were often made for two people. 10% or so of guests brought their families. Few bring their families with them. Offer family-friendly discounts to encourage reservations for family and business events.
+##### <ins> Bivariate Analysis </ins>
+     performed bivariate analysis and reached the following conclusions:
+     - The inability to assign a reserved room to a customer is not grounds for cancellation
+     - Less lead time means fewer cancellations. Booking cancellations are not caused by a longer Lead time.
+     - Most customers book hotels for two people (couples). Customers prefer city hotels over resorts for family bookings.
+     - In comparison to city hotels, guests book resort hotels a little bit in advance.
+     - The majority of canceled bookings were made through the TA/TO distribution channel
+     - The majority of hotel reservations are made online, as are the majority of cancellations of reservations made by customers who made their reservations online.
+     - Room types G, followed by H, generate high ADR
+     - A city hotel is busier than a resort.
+     - City hotels generate more revenue (54.86%) than resort hotels (45.14%)
+     - Only a few customers (8.31%) requested parking. One parking space is most desirable to customers. 
+     - The majority of the guests are staying at the hotel for three nights. 
+     - Customers frequently make one special request. Couples make the majority of special requests.
+     - Not assigning a reserved room does not affect ADR.
+     - The majority of reservations are made through country PRT.
+     - Agent nummber 9 made most number of bookings.
+     - Longer waiting period is not a reason for booking cancellation.
+     - People were consistently interested in booking rooms in advance in 2015, 2016, and 2017.
+
+## <ins> Conclusion </ins>
+     - The top country with the most number of bookings is PRT, and the number one agent with the most number of bookings is 9. 
+     - Customers favored city hotels more than resort hotels by a margin of 61.07 percent.
+     - One of the four reservations is canceled.
+     - The most popular food is BB.
+     - The Online (internet) platform is used to make the majority of bookings.
+     - The majority of the bookings are made using TA/TO, the leading distribution channel.
+     - The vast majority of hotel bookings are made by new guests. Almost no consumers (3.86%) returned.
+     - The customer wants Room A to be reserved the most.
+     - Customers do not wish to make a bookings with a pre-deposit.
+     - Customers (80%) favored making a hotel reservation for a short visit.
+     - Only 10% of people require space to park their cars.
+     - Most visitors are couples.
+     - The inability to assign a reserved room to a customer is not grounds for cancellation.
+     - Booking cancellations are not caused by a longer Lead time.
+     - A city hotel is busier than a resort.
+     - The busiest months for hotels are October and September. There isn't a lengthy wait for reservations in July.
+     - Not assigning a reserved room does not affect ADR.
+
+## <ins> Challenges </ins>
+     - The data contained a large number of duplicates.
+     - The improper data type format was used for the data.
+     - It was challenging to select the best visualization techniques.
+     - The dataset contained a large number of null values.
 
-Objective We are provided with a hotel bookings dataset.
-
-Our main objective is perform EDA on the given dataset and draw useful conclusions about general trends in hotel bookings and how factors governing hotel bookings interact with each other.
-
-Dataset We are given a hotel bookings dataset. This dataset contains booking information for a city hotel and a resort hotel. It contains the following features.
-
-hotel : Hotel (Resort Hotel or City Hotel)
-
-is_canceled : Value indicating if the booking was canceled (1) or not (0)
-
-lead_time : Number of days that elapsed between the entering date of the booking into the PMS and the arrival date
-
-arrival_date_year : Year of arrival date
-
-arrival_date_month : Month of arrival date
-
-arrival_date_week_number : Week number of year for arrival date
-
-arrival_date_day_of_month : Day of arrival date
-
-stays_in_weekend_nights : Number of weekend nights (Saturday or Sunday) the guest stayed or booked to stay at the hotel
-
-stays_in_week_nights : Number of week nights (Monday to Friday) the guest stayed or booked to stay at the hotel
-
-adults : Number of adults
-
-children : Number of children
-
-babies : Number of babies
-
-meal : Type of meal booked. Categories are presented in standard hospitality meal packages:
-
-country : Country of origin.`
-
-market_segment : Market segment designation. In categories, the term “TA” means “Travel Agents” and “TO” means “Tour Operators”
-
-distribution_channel : Booking distribution channel. The term “TA” means “Travel Agents” and “TO” means “Tour Operators”
-
-is_repeated_guest : Value indicating if the booking name was from a repeated guest (1) or not (0)
-
-previous_cancellations : Number of previous bookings that were cancelled by the customer prior to the current booking
-
-previous_bookings_not_canceled : Number of previous bookings not cancelled by the customer prior to the current booking
-
-reserved_room_type : Code of room type reserved. Code is presented instead of designation for anonymity reasons.
-
-assigned_room_type : Code for the type of room assigned to the booking.
-
-booking_changes : Number of changes/amendments made to the booking from the moment the booking was entered on the PMS until the moment of check-in or
-
-cancellation deposit_type : Indication on if the customer made a deposit to guarantee the booking.
-
-agent : ID of the travel agency that made the booking
-
-company : ID of the company/entity that made the booking or responsible for paying the booking.
-
-days_in_waiting_list : Number of days the booking was in the waiting list before it was confirmed to the customer
-
-customer_type : Type of booking, assuming one of four categories
-
-adr : Average Daily Rate as defined by dividing the sum of all lodging transactions by the total number of staying nights
-
-required_car_parking_spaces : Number of car parking spaces required by the customer
-
-total_of_special_requests : Number of special requests made by the customer (e.g. twin bed or high floor)
-
-reservation_status : Reservation last status, assuming one of three categories a). Canceled – booking was canceled by the customer b). Check-Out – customer has
-
-checked in but already departed c). No-Show – customer did not check-in and did inform the hotel of the reason
-
-reservation_status_date : Date at which the last status was set. This variable can be used in conjunction with the ReservationStatus to understand when was the
-
-booking canceled or when did the customer checked-out of the hotel Total number of rows in data: 119390 Total number of columns: 32
-
-Know your data
-
-Dataset Information
-
-Duplicate Values
-
-Missing Values/Null Values
-
-Understanding Your Variables
-
-Check Unique Values for each variable.
-
-Data wrangling
-
-count that in which year of which month most number of customers arrived at hotel.
-
-Customer type, Room type, room_comparision, Deposit_type, Is_canceled checked.
-
-How many customer have changed their booking.
-
-remove duplicates values
-
-finding uniques values for each variables
-
-Find hotel ratio Adding a two new column of total staying days,total people stays
-
-Remove outliers by box plot. Did All th manipulation
-
-What main questions was arising :-
-
-Which types of customers mostly make bookings?
-
-Which room type is in most demand and which room type generatesthe highest adr?
-
-Which distribution channel brings betterrevenue-generatingg deals for hotels?
-
-Which significant distribution channel has the highest cancellation percentage?
-
-What is the trend of bookings within a month?
-
-Which Hotel has Highest booking ratio(comparision)?
-
-What is preferred stay length in hotel if we compare with Customer type?
-
-In which year most booking has happened for bothe type hotels?
-
-From which country most of the guests are coming ?
-
-In which month most of the booking happened?
-
-Which market segment has booked and canceled the booking?
-
-What type of Customer has highest booking as Couples, Single, Group?
-
-Which meal type is the most preffered meal of customers?
-
-Finding out corelation between Different variables?
-
-which has highet ADR?
-
-Mainly performed using Matplotlib and Seaborn library and the following graph and plots had been used:
-
-Bar Plot
-
-Histogram
-
-Scatter Plot
-
-Pie Chart
-
-Line Plot
-
-Heatmap
-
-Box Plot
-
-Pair plot
-
-We plot different graph (univariate and bivariate ) to make find out the last conclusion:-
-
-Around 60% bookings are for City hotel and 40% bookings are for Resort hotel, therefore City Hotel is busier than Resort hotel. Also the overall adr of City hotel is slightly higher than Resort hotel.
-
-Mostly guests stay for less than 5 days in hotel and for longer stays Resort hotel is preferred.
-
-Both hotels have significantly higher booking cancellation rates and very few guests less than 3 % return for another booking in City hotel. 5% guests return for stay in Resort hotel.
-
-Most of the guests came from european countries, with most of guests coming from Portugal.
-
-Guests use different channels for making bookings out of which most preferred way is TA/TO.
-
-Almost 30% of bookings via TA/TO are cancelled.
-
-July- August are the most busier and profitable months for both of hotels.
-
-Couples are the most common guests for hotels, hence hotels can plan services according to couples needs to increase revenue.
-
-For customers, generally the longer stays (more than 15 days) can result in better deals in terms of low adr.
-
-Higher lead time has higher chance of cancellation. Also, history of previous cancellations increases chances of cancellation.
-
-Challenges
-
-There was a lot of duplicate data.
-
-Data was present in wrong datatype format.
-
-Choosing appropriate visualization techniques to use was difficult.
-
-A lot of null values were there in the dataset.
