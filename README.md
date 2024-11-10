@@ -1,5 +1,5 @@
 # Hotel Booking Analysis - EDA Using Python and Dashboard Making Using Tableau
-
+![pr3_A5E4E6735C47C4AAF92E](https://github.com/user-attachments/assets/234f1e64-6ae6-4c7e-9ca4-d90fb1024bab)
 ## <ins> Dashboard Link </ins> - [Link](https://public.tableau.com/views/HotelBookingsDashboard_17301865491130/HBDDASHBOARD?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 
 ## <ins> Dashboard Preview </ins>
